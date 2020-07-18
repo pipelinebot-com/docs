@@ -6,16 +6,16 @@ long_description: >-
   Powered by open source.
 
 twitter:
-  username: deliverybotdev
+  username: pipelinebot
   card: summary
 logo: /assets/logo.png
 image: /assets/logo.png
 author:
-  twitter: deliverybotdev
+  twitter: pipelinebot
 social:
-  name: Deliverybot
+  name: PipelineBot
   links:
-    - https://twitter.com/deliverybotdev
+    - https://twitter.com/pipelinebot
 
 deliverybot_url: https://app.deliverybot.dev
 github_app_url: https://github.com/apps/deliverybot
