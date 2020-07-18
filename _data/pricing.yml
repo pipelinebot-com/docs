@@ -30,7 +30,7 @@ bullets:
 
 questions:
 - q: Have more than 50 users?
-  a: <a href="mailto:support@deliverybot.dev" class="ic-open">Contact us.</a>
+  a: <a href="mailto:support@pipelinebot.com" class="ic-open">Contact us.</a>
 
 - q: Do you have yearly billing?
   a: Yes we are able to accept subscriptions for one year.
@@ -42,5 +42,5 @@ questions:
   a: No we don't. Unfortunately, we do need read access to code to listen for push events to trigger automatic deployments but we don't store your repository code. Read our <a href="/terms/security/">security guide</a> for more information.
 
 - q: Have any other questions?
-  a: Happy to <a href="mailto:support@deliverybot.dev" class="ic-open">answer them</a>.
+  a: Happy to <a href="mailto:support@pipelinebot.com" class="ic-open">answer them</a>.
 
