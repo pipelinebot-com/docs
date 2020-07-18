@@ -1,6 +1,6 @@
 title: deliverybot
 description: >-
-  Simple Continuous Delivery for GitHub
+  The missing build pipeline for GitHub Actions
 long_description: >-
   Fast, safe and secure Continous Delivery pipelines you can setup in minutes.
   Powered by open source.
