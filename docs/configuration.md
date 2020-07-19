@@ -1,114 +1,79 @@
 ---
 layout: page
-title: deploy.yml
+title: Configuration file
 ---
 
-# Configuration (`.github/deploy.yml`)
+PipelineBot manages pipelines based on configuration files. One configuration file
+describe one pipeline.
 
-Deliverybot controls deployments based on a configuration file. Targets are the
-top level resource for this file which house configuration to trigger a list of
-deployments depending on specific conditions. Documentation for those conditions
-and fields is provided below.
+# About YAML syntax for pipelines
+ 
+Pipeline files uses YAML syntax, and must have either a `.yml` or `.yaml` file extension. If
+you're new to YAML and want to learn more, 
+see "[Learn YAML in five minutes](https://www.codeproject.com/Articles/1214409/Learn-YAML-in-five-minutes)"
 
-```yaml {% raw %}
-# .github/deploy.yml
-production:
-  environment: name {% endraw %}
-```
+You must store pipeline files in the `.github/pipelines` directory of your repository.
 
-- [`<target>.auto_deploy_on`](#targetauto_deploy_on)
-- [`<target>.transient_environment`](#targettransient_environment)
-- [`<target>.production_environment`](#targetproduction_environment)
-- [`<target>.required_contexts`](#targetrequired_contexts)
-- [`<target>.environment`](#targetenvironment)
-- [`<target>.task`](#targettask)
-- [`<target>.auto_merge`](#targetauto_merge)
-- [`<target>.payload`](#targetpayload)
 
-##### `<target>.auto_deploy_on`
-
-Controls auto deployment behaviour given a ref. If any new push events are
-detected on this event, the deployment will be triggered.
+## Stage
+`stages` are top level resource for this file which house a list of stages in the pipeline. 
+Documentation for stages is provided below.
 
 ```yaml
-# .github/deploy.yml
-production:
-  auto_deploy_on: refs/heads/master
+# .github/pipelines/pipeline0.yml
+stages:
+  - Build
+  - Test
+  - Stage
+  - Production
 ```
 
-__Recently added!__:
+## Task
 
-This configuration option also supports a `*` character to match any subsequent
-characters after it. This allows us to deploy on any tag (`refs/tags/*`) or to
-match any branch for deployments (`refs/heads/*`).
-
-Deploying on any tag is probably one of the most commonly used features for
-deliverybot:
+`tasks` are another root level resource for the configuration file. It contains a list of
+tasks which are bound to a `stage`. Documentation for `tasks` is provided bellow. 
 
 ```yaml
-  auto_deploy_on: refs/tags/*
+# same file: .github/pipeline/pipeline0.yml
+tasks:
+  - workflow: build
+    stage: Build
+  - name: test1
+    workflow: unit test
+    stage: Test
+    ...
+  - name: deploy to prod
+    stage: Production
+    ignore: [test1]
 ```
 
-##### `<target>.transient_environment`
+### name
+In Pipeline Bot, `task` is a container of Github's `workflow`. You can use the `name` field
+to give the `workflow` an alias. If you omit `name` in your pipeline file, we default it to
+`workflow`'s name.
 
-Specifies if the given environment is specific to the deployment and will no
-longer exist at some point in the future. Default: false
+### workflow
+**Required** The `workflow` the is contained in the `task` item. The value of the `workflow` field is the 
+[workflow name](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#name) in GitHub.
 
-If this value is `true` all deployments triggered on a pr will be marked
-inactive.
+> You can set `name` of your workflow with the name field in your `workflow` files.
+ If you omit name in your workflow file, GitHub sets it
+ to the workflow file path relative to the root of the repository. In that case, Pipeline Bot
+ uses the workflow filename as the workflow name.
 
-##### `<target>.production_environment`
+### stage
+**Required** The `stage` that this `task` belongs to. 
+<span class="warning">If not provided, this `task` is ignored.</span>
 
-Specifies if the given environment is one that end-users directly interact with.
-Default: true when environment is production and false otherwise.
+### ignore
+The tasks from the previous stage that should be ignored when starting this task. 
+By default, a stage starts only all the tasks of the
+previous stage finish successfully. 
 
-##### `<target>.required_contexts`
+If a task has `tasks` in the `ignore` list, it will be started regardless
+whether the tasks in the ignore list succeeded or not. However, it will still wait for all the
+tasks to finish. 
 
-The status contexts to verify against commit status checks. Default: []
-
-##### `<target>.environment`
-
-The name of the environment that was deployed to (e.g., staging or production).
-Default: none
-
-
-##### `<target>.task`
-
-The name of the task for the deployment (e.g., deploy or deploy:migrations).
-Default: none
-
-##### `<target>.auto_merge`
-
-Attempts to automatically merge the default branch into the requested ref, if
-it's behind the default branch. Default: false
-
-##### `<target>.payload`
-
-Payload with extra information about the deployment. Default: {}
-
-## Variables
-
-The following variables are available using `{% raw %}${{ }}{% endraw %}` syntax
-when evaluating deployment targets:
-
-- `ref`: Deployment ref, ie: `master`.
-- `sha`: Full git sha.
-- `short_sha`: Short git sha.
-- `pr`: Pr number, if this deployment is kicked off in a PR.
-- `target`: Current target name.
-- `owner`: Owner name.
-- `repo`: Repo name.
-- `pull_request`: [GitHub pull request object.][pr]
-- `commit`: [GitHub commit object.][commit]
-
-An example usage of this:
-
-```yaml {% raw %}
-# .github/deploy.yml
-review:
-  # Dynamic environment name. The environment will look like pr123.
-  environment: pr${{ pr }} {% endraw %}
-```
-
-[pr]: https://developer.github.com/v3/pulls/#response-1
-[commit]: https://developer.github.com/v3/git/commits/#response
+> #### Road-map (RFC)
+> You can also put the previous `stage` in the `ignore` list, the `task` will be started as soon as
+the previous `stage` is started.
