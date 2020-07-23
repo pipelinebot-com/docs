@@ -31,74 +31,71 @@ to implement auto trigger and manual trigger.
 
 ## Auto trigger
 
-GitHub actions are one of the simplest ways to handle your deployments. Actions
+PipelineBot can be looked as a wrapper of GitHub Actions. Actions
 run on GitHub infrastructure in response to GitHub events. The basic format for
-setting up a GitHub action to handle a deployment looks like this:
+setting up a GitHub action looks like this:
 
 ```yaml
-# .github/workflows/deploy.yml
-name: 'Deploy'
-on: ['deployment']
+# .github/workflows/build.yml
+name: 'Build'
+on: [push]
 
 jobs:
-  deployment:
+  build:
+    runs-on: 'ubuntu-latest'
+    steps: []
+    # Steps to execute your build.
+```
+
+```yaml
+# .github/workflows/test.yml
+name: 'Test'
+on: workfolow_dispatch
+
+jobs:
+  build:
+    runs-on: 'ubuntu-latest'
+    steps: []
+    # Steps to execute your test.
+```
+
+The following configuration sets up a pipeline that triggers the *Test* workflow
+automatically when *Build* finishes.
+
+```yaml
+version: 0.3.0-beta
+stages:
+  - Build
+  - Test
+```
+
+The *Build* workflow that will run on `push` events triggered
+in your specific repository. When the *Build* workflow finishes, 
+PipelineBot triggers the *Test* events via dispatching a `workflow_dispatch` event.
+
+## Manual trigger
+
+Let's say we have a third stage `Deploy` that you would like to trigger it manually.
+The corresponding workflow looks like this:
+
+```yaml
+name: 'Deploy'
+on: workflow_dispatch
+
+jobs:
+  build:
     runs-on: 'ubuntu-latest'
     steps: []
     # Steps to execute your deployment.
-```
+``` 
 
-The above instantiates a workflow that will run on `deployment` events triggered
-in your specific repository. Deliverybot triggers these events and your code
-does the work of shipping the actual deployments onto your infrastructure.
-
-If you are building your own actions, one important thing that you may notice
-is that the deployment is always sitting in 'pending' or 'waiting'. For
-GitHub and Deliverybot to be able to track your deployment you need to send back
-`deployment_status` events. Below is a template for doing just that, we have
-actions that run before and after your main deployment block which set the
-correct status:
+In the pipeline configuration file, you need to add a new stage and mark the trigger
+as manual.
 
 ```yaml
-# .github/workflows/deploy.yml
-name: 'Deploy'
-on: ['deployment']
-
-jobs:
-  deployment:
-    runs-on: 'ubuntu-latest'
-    steps:
-    - name: 'Checkout'
-      uses: 'actions/checkout@v1'
-
-    - name: 'Deployment pending'
-      uses: 'deliverybot/deployment-status@master'
-      with:
-        state: 'pending'
-        token: '${{ github.token }}'
-
-    - name: 'Deploy ${{ github.event.deployment.environment }}'
-      run: |
-        echo 'YOUR CODE HERE'
-
-    - name: 'Deployment success'
-      if: success()
-      uses: 'deliverybot/deployment-status@master'
-      with:
-        state: 'success'
-        token: '${{ github.token }}'
-
-    - name: 'Deployment failure'
-      if: failure()
-      uses: 'deliverybot/deployment-status@master'
-      with:
-        state: 'failure'
-        token: '${{ github.token }}'
+version: 0.3.0-beta
+stages:
+  - Build
+  - Test
+  - Deploy: manual
 ```
-
-## Deliverying deployments with external tooling
-
-Since it's just listening to GitHub events to execute a deployment you can use
-a wide variety of tooling to actually ship deployments. The following guide
-includes details on how to write code to handle deployments:
-
-<https://developer.github.com/v3/guides/delivering-deployments/>
