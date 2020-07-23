@@ -36,7 +36,7 @@ There are two access modes to Deliverybot:
 - Server access (using GitHub app JWT).
 
 OAuth access handles any page that you access in your browser at
-`app.deliverybot.dev`. Any API calls to GitHub are made using the current users
+`app.pipelinebot.com`. Any API calls to GitHub are made using the current users
 access token and we simply delegate to GitHub's access policies in this case for
 controlling deployment access and other features.
 
@@ -56,7 +56,7 @@ information required to process deployments across your repositories.
 
 ## Sessions
 
-Sessions are managed at `app.deliverybot.dev` using an encrypted cookie which
+Sessions are managed at `app.pipelinebot.com` using an encrypted cookie which
 associates a users oauth token which expires within 24 hours.
 
 ## Access control

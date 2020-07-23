@@ -17,12 +17,12 @@ social:
   links:
     - https://twitter.com/pipelinebot
 
-deliverybot_url: https://app.deliverybot.dev
+deliverybot_url: https://app.pipelinebot.com
 github_app_url: https://github.com/apps/deliverybot
 github_org_url: https://github.com/deliverybot
 spectrum_url: https://spectrum.chat/deliverybot/general
 start_url: /docs/quickstart/
-slack_url: https://app.deliverybot.dev/slack/install
+slack_url: https://app.pipelinebot.com/slack/install
 pricing_url: /pricing
 twitter_url: https://twitter.com/deliverybotdev
 
@@ -37,7 +37,7 @@ corp_name: Deliverybot
 service_name: Deliverybot
 
 baseurl: ""
-url: https://deliverybot.dev
+url: https://pipelinebot.com
 markdown: kramdown
 kramdown:
   input: GFM
