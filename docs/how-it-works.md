@@ -29,6 +29,8 @@ to implement auto trigger and manual trigger.
 [1]: https://github.com/features/actions/
 [2]: /docs/configuration/
 
+> TODO: create an example repo as a demo.
+
 ## Auto trigger
 
 PipelineBot can be looked as a wrapper of GitHub Actions. Actions
