@@ -5,7 +5,8 @@ title: How it works
 
 # How it works
 
-Deliverybot is built around the GitHub [deployments api][1]. It's an event
+Pipelinebot is built around [GitHub Actions][1]. It builds pipelines based on GitHub workflows.
+ It allows you to join your workflows as pipelines with auto-trigger or manual trigger. It's an event
 driven decoupled way to deploy your code. Deliverybot is responsible for
 figuring out when to trigger a deployment. When conditions are met it triggers
 a deploy to the environment that you've specified in the [configuration file][2].
@@ -16,7 +17,7 @@ The diagram below details what a deployment looks like:
 
 ```
 +-------------+         +--------+         +----------------+        +-------------+
-| Deliverybot |         | GitHub |         | GitHub Actions |        | Your Server |
+| PipelineBot |         | GitHub |         | GitHub Actions |        | Your Server |
 +-------------+         +--------+         +----------------+        +-------------+
      |                      |                       |                     |
      |  Create Deployment   |                       |                     |
