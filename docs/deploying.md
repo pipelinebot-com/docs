@@ -5,8 +5,8 @@ title: Deploying
 
 # Deploying
 
-Deliverybot is a [Probot](https://probot.github.io){:target="_blank"}
-application that responds to events from GitHub and triggers deployments based
+PipelineBot is a [Probot](https://probot.github.io){:target="_blank"}
+application that responds to events from GitHub and triggers tasks (workflows) based
 on actions in the application and check status events from GitHub.
 
 It requires storage providers to be implemented as well as deployment
