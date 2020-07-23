@@ -5,59 +5,31 @@ title: How it works
 
 # How it works
 
-Pipelinebot is built around [GitHub Actions][1]. It builds pipelines based on GitHub workflows.
- It allows you to join your workflows as pipelines with auto-trigger or manual trigger. It's an event
-driven decoupled way to deploy your code. Deliverybot is responsible for
-figuring out when to trigger a deployment. When conditions are met it triggers
-a deploy to the environment that you've specified in the [configuration file][2].
-Once the deployment is triggered, your code picks up the deployment event and
-runs the actual deploy to your infrastructure.
+PipelineBot is built around [GitHub Actions][1]. It builds pipelines based on GitHub workflow.
+It allows you to join your workflows as pipelines with auto or manual trigger. It's an event
+driven decoupled way to deploy your code. Pipeline is responsible for
+figuring out when to trigger a task. When conditions are met it triggers
+a task to the environment that you've specified in the [configuration file][2].
+Once the task is triggered, your script defined in the workflow will execute as designed.
 
 The diagram below details what a deployment looks like:
+![how-it-works](/assets/images/docs-how-it-works.png)
 
-```
-+-------------+         +--------+         +----------------+        +-------------+
-| PipelineBot |         | GitHub |         | GitHub Actions |        | Your Server |
-+-------------+         +--------+         +----------------+        +-------------+
-     |                      |                       |                     |
-     |  Create Deployment   |                       |                     |
-     |--------------------->|                       |                     |
-     |                      |                       |                     |
-     |  Deployment Created  |                       |                     |
-     |<---------------------|                       |                     |
-     |                      |                       |                     |
-     |                      |   Deployment Event    |                     |
-     |                      |---------------------->|                     |
-     |                      |                       |     SSH+Deploys     |
-     |                      |                       |-------------------->|
-     |                      |                       |                     |
-     |                      |   Deployment Status   |                     |
-     |                      |<----------------------|                     |
-     |                      |                       |                     |
-     |                      |                       |   Deploy Completed  |
-     |                      |                       |>--------------------|
-     |                      |                       |                     |
-     |                      |   Deployment Status   |                     |
-     |                      |<----------------------|                     |
-     |                      |                       |                     |
-```
-
-The benefit to this architecture is that your deployments are separate from
-the platform that you are deploying to. If you change platforms or use multiple
-platforms within a team you can still enforce the same continous delivery
+The benefit to this architecture is that your workflows are separate from
+the platform that schedule them. If you change platforms or use multiple
+platforms two schedule your workflows you can still enforce the same continuous delivery
 processes.
 
-This architecture is well suited for [GitHub Actions][3] which is the GitHub
+This architecture is well suited for [GitHub Actions][1] which is the GitHub
 supported system for running your code in response to GitHub events. It means
-that setting up Deliverybot is much simpler since you don't also have to manage
+that setting up PipelineBot is much simpler since you don't also have to manage
 infrastructure to listen to events. The next sections go through guides on how
-to deliver deployments.
+to implement auto trigger and manual trigger.
 
-[1]: https://developer.github.com/v3/repos/deployments/
+[1]: https://github.com/features/actions/
 [2]: /docs/configuration/
-[3]: https://github.com/features/actions/
 
-## Deliverying deployments with GitHub actions
+## Auto trigger
 
 GitHub actions are one of the simplest ways to handle your deployments. Actions
 run on GitHub infrastructure in response to GitHub events. The basic format for
