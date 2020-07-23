@@ -17,7 +17,7 @@ social:
   links:
     - https://twitter.com/pipelinebot
 
-deliverybot_url: https://app.pipelinebot.com
+pipelinebot_url: https://app.pipelinebot.com
 github_app_url: https://github.com/apps/deliverybot
 github_org_url: https://github.com/deliverybot
 spectrum_url: https://spectrum.chat/deliverybot/general
