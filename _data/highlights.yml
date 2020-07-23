@@ -1,37 +1,39 @@
 main:
 - image: /assets/images/deploy-list.png
-  title: Click to deploy
+  title: End to End Visualisation
   left: true
   description: |
-   Click the latest commit in the Deliverybot dashboard to deploy your
-   code. It doesn't get any simpler than that.
+    PipelineBot shows your entire path to production in a single view. Easily navigate
+    across workflows, spot inefficiencies and optimize your process.
+
 
 - image: /assets/images/deploy-show.png
-  title: Automatic deployments
+  title: Manual & Auto Trigger
   description: |
-    Deploy automatically to multiple clusters and environments given a
-    specific branch. Waits for required status checks, manual approval and more
-    to allow for complex pipeline workflows.
+    PipelineBot allows you to trigger stages automatically or manually. You get full
+    control of your workflows which is configured with a file stays in your repository.
+    PipelineBot is great at managing complex workflows.
 
 - image: /assets/images/pr-deploy.png
-  title: Advanced deployment workflows
+  title: Fully integrated with Github
   left: true
   description: |
-    Orchestrate canary deployments to test code in incremental steps or
-    push out environments per pull request. Deliverybot is great at managing
-    complex workflows.
+    PipelineBot is built as a Github App. You login with your Github accounts. Jobs run
+    as Github Actions. This creates a seamless experience for your team. You do not need
+    to switch to a different tool to manage your pipeline, while the team is already on
+    Github.
 
 - image: /assets/images/deploy-slack.png
   title: ChatOps
   description: |
-    Trigger deployments using Slack. Don't leave your teams workflow tool
-    to manage your deploys.
+    Approve deployments using Slack. Don't leave your teams workflow tool
+    to manage your pipelines.
 
 - image: /assets/images/deploy-analytics.png
   title: Analytics
   left: true
   description: |
-    Track your teams DevOps performance with key analytics. Metrics like lead
+    Track your teams performance with key analytics. Metrics like lead
     time and deployment frequency are recommended by the state of DevOps report.
 
 kubernetes:
