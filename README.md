@@ -1,6 +1,6 @@
-# Deliverybot site
+# Pipelinebot site
 
-https://deliverybot.dev
+https://pipelinebot.com
 
 ## Adding an integration
 
