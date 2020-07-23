@@ -38,7 +38,7 @@ questions:
 - q: Can we cancel at any time?
   a: Yes, your subscription will continue up until the date that you have paid for.
 
-- q: Does deliverybot store my code?
+- q: Does pipelinebot store my code?
   a: No we don't. Unfortunately, we do need read access to code to listen for push events to trigger automatic deployments but we don't store your repository code. Read our <a href="/terms/security/">security guide</a> for more information.
 
 - q: Have any other questions?

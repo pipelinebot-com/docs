@@ -1,6 +1,6 @@
 - name: GitOps
-  url: https://github.com/deliverybot/example-gitops
+  url: https://github.com/pipelinebot-com/example-gitops
 - name: Helm
-  url: https://github.com/deliverybot/example-helm
+  url: https://github.com/pipelinebot-com/example-helm
 - name: Basic
-  url: https://github.com/deliverybot/example
+  url: https://github.com/pipelinebot-com/example
