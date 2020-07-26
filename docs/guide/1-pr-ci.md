@@ -9,8 +9,8 @@ group: Guide
 {% raw %}
 
 We need to setup the basic continuous integration parts of our workflow first.
-This provides a green check to let deliverybot know whether a commit is safe to
-deploy to an environment. Usually these are your unit and integration tests
+This provides a green check to let PipelineBot know whether it is safe to
+the next stage. Usually these are your build (compile), unit and integration tests
 that are run as part of every commit.
 
 Copy the below code into your repository at the path `.github/workflows/ci.yml`.
@@ -35,7 +35,7 @@ to notify us whether our code passed it's checks. For concrete examples of
 what to put into this you can take a look at the starter workflows
 [repository][starter-actions] for different examples.
 
-The important thing to note for our purposes is the `ci` tag is the key that
+The important thing to note for our purposes is the `ci` tag is the name that
 we'll use to ensure that this check is passed before merging into master.
 Add this check to your required contexts when merging into master. This will
 prevent merges into master without your CI pipeline passing.
