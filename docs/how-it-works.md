@@ -3,6 +3,15 @@ layout: page
 title: How it works
 ---
 
+## Prerequisites
+
+We'll assume that you have some familiarity with GitHub Actions and CI/CD concepts. If they are
+totally new to you, please checkout the following links to grasp the basics and come back.
+
+1. [GitHub Actions][1]
+1. [Continuous Integration](https://continuousdelivery.com/foundations/continuous-integration/)
+1. [Continuous Delivery](https://continuousdelivery.com/)
+
 # How it works
 
 PipelineBot is built around [GitHub Actions][1]. It builds pipelines based on GitHub workflow.
