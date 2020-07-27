@@ -5,40 +5,39 @@ title: Quickstart
 
 # Quickstart
 
-Deliverybot is a GitHub app, to get started with deployments we need a
-repository and to install the Deliverybot app onto that repo. The below guide
-will walk you through deploying deliverybot and getting an example repository
-setup.
+PipelineBot is a GitHub app, to get started with pipelines we need a
+repository and to install the PipelineBot app onto that repo. The below guide
+will walk you through getting an example repository setup.
 
-### 1. [Deploy the Deliverybot GitHub app][app]
+### 1. [Fork the example repository][example]{:target="_blank"}
+The example repository demonstrates a simple pipeline that contains 4 stages.
+For more information, checkout the [guide][guide]{:target="_blank"}.
 
-Deploy the Deliverybot GitHub application to an infrastructure of your choice.
+### 2. [Install PipelineBot App][app] from GitHub marketplace
+Make sure you select the organisation that contains the repository your just forked.
 
-### 2. [Fork the example repository][example]{:target="_blank"}
+<!--TODO: add images to demonstrate the steps to install the GitHub App -->
 
-Visit one of the example repositories and create a new fork:
+### 3. Push a commit to watch the pipeline kick off
+Make some changes (e.g. update the README.md), commit and push it. This will trigger
+the whole pipeline.
 
-- [Basic example that doesn't actually deploy][example]{:target="_blank"}.
-- [GitOps example with FluxCD][example-gitops]{:target="_blank"}.
-- [Helm example with actions and pr environments][example-helm]{:target="_blank"}.
+<!--TODO:
+1. add a link to update the README.md;
+2. explain the difference between triggering a workflow and trigger a pipeline
+-->
 
-### 3. Push a commit to watch the workflows kick off!
-
-Go to your repository and push a commit.
-
-### 4. [Install integrations][integrations]{:target="_blank"}
-
-Install integrations like Slack or Helm to build a workflow for your team. Visit
-our [integrations page][integrations]{:target="_blank"} for more information.
+### 4. Manually trigger the last stage `Production`
+PipelineBot will automatically trigger the following two stages - `UAT` and `Staging`.
+However, in some cases (more often than not), you want the last step `Production` to
+be triggered manually. Once the previous three stages finish, you can pick one version
+to trigger the production deployment.
 
 ## Next
 
 Once you have a working example read through the [guide](/docs/guide/) for more
 information on how to setup complex workflows.
 
-[app]: /docs/deploying/
+[guide]: /docs/guide
 [how]: /docs/how-it-works/
-[example]: https://github.com/deliverybot/example
-[example-helm]: https://github.com/deliverybot/example-helm
-[example-gitops]: https://github.com/deliverybot/example-gitops
-[integrations]: /integrations/
+[app]: https://github.com/marketplace/pipelinebotapp
