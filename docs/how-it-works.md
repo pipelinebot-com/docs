@@ -15,15 +15,17 @@ totally new to you, please checkout the following links to grasp the basics and 
 # How it works
 
 PipelineBot is built around [GitHub Actions][1]. It builds pipelines based on GitHub workflow.
-It allows you to join your workflows as pipelines with auto or manual trigger. It's an event
-driven decoupled way to implement continuous delivery. PipelineBot is responsible for
+It allows you to join your workflows as pipelines with auto or manual trigger. 
+
+<iframe style="border:none" width="100%" height="300" src="https://gifted-lamport-c29e52.netlify.app/"></iframe>
+
+PipelineBot is responsible for
 figuring out when to trigger a task. When conditions are met it triggers
 a task to the environment that you've specified in the [configuration file][2].
 Once the task is triggered, your script defined in the workflow will execute as designed.
 
-The diagram below details what a pipeline looks like:
+The diagram below shows how you interact with the workflows through PipelineBot:
 ![how-it-works](/assets/images/docs-how-it-works.png)
-<iframe style="border:none" width="100%" height="300" src="https://gifted-lamport-c29e52.netlify.app/"></iframe>
 The benefit to this architecture is that your workflows are separate from
 the platform that schedule them. If you change platforms or use multiple
 platforms two schedule your workflows you can still enforce the same continuous delivery
