@@ -16,7 +16,7 @@ totally new to you, please checkout the following links to grasp the basics and 
 
 PipelineBot is built around [GitHub Actions][1]. It builds pipelines based on GitHub workflow.
 It allows you to join your workflows as pipelines with auto or manual trigger. It's an event
-driven decoupled way to deploy your code. Pipeline is responsible for
+driven decoupled way to implement continuous delivery. PipelineBot is responsible for
 figuring out when to trigger a task. When conditions are met it triggers
 a task to the environment that you've specified in the [configuration file][2].
 Once the task is triggered, your script defined in the workflow will execute as designed.
