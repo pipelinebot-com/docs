@@ -50,7 +50,7 @@ setting up a GitHub action looks like this:
 
 ```yaml
 # .github/workflows/build.yml
-name: 'Build'
+name: 'build'
 on: [push]
 
 jobs:
@@ -62,7 +62,7 @@ jobs:
 
 ```yaml
 # .github/workflows/test.yml
-name: 'Test'
+name: 'test'
 on: workfolow_dispatch
 
 jobs:
@@ -72,27 +72,31 @@ jobs:
     # Steps to execute your test.
 ```
 
-The following configuration sets up a pipeline that triggers the *Test* workflow
-automatically when *Build* finishes.
+The following configuration sets up a pipeline that starts the **Test** `stage`
+automatically when the **Build** `stage` finishes.
 
 ```yaml
+# .github/pipelines/pipeline-0.yml
 version: 0.3.0-beta
 stages:
   - Build
   - Test
+ 
+tasks:
+  - workflow: build
+    stage: Build
+  - workflow: test
+    stage: Test
 ```
-
-The *Build* workflow that will run on `push` events triggered
-in your specific repository. When the *Build* workflow finishes, 
-PipelineBot triggers the *Test* events via dispatching a `workflow_dispatch` event.
 
 ## Manual trigger
 
-Let's say we have a third stage `Deploy` that you would like to trigger it manually.
+Let's say we have a third stage `Production` that you would like to trigger it manually.
 The corresponding workflow looks like this:
 
 ```yaml
-name: 'Deploy'
+# .github/workflows/deploy-to-production.yml
+name: 'deploy to production'
 on: workflow_dispatch
 
 jobs:
@@ -106,9 +110,18 @@ In the pipeline configuration file, you need to add a new stage and mark the tri
 as manual.
 
 ```yaml
+# .github/workflows/pipeline-0.yml
 version: 0.3.0-beta
 stages:
   - Build
   - Test
-  - Deploy: manual
+  - Production
+
+tasks:
+  - workflow: build
+    stage: Build
+  - workflow: test
+    stage: Test
+  - workflow: deploy to production
+    stage: Production
 ```
